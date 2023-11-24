@@ -18,7 +18,7 @@ class PetController {
         const novoPet = req.body;
         try {
             const adopterEncontrado = await adopter.findById(novoPet.adopter);
-            const petCompleto = { ...novoPet, adopter: { ...adopterEncontrado._doc } };
+            const petCompleto = { ...novoPet, adopter: { ...adopterEncontrado?._doc } };
             const petCriado = await pet.create(petCompleto);
             res.status(201).json({ message: "Criado com sucesso", pet: petCriado });            
         } catch (e) {
